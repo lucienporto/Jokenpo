@@ -1,89 +1,95 @@
-//string play = "";
-string? readResult;
+bool playAgain = true;
+string jogador;
 string jokenpo;
-string selected = "";
+string novoJogo;
 
 Random random = new Random();
-int dice = random.Next(1, 4);
 
-if (dice == 1)
+while (playAgain)
 {
-    jokenpo = "Pedra";
-}
-else if (dice == 2)
-{
-    jokenpo = "Papel";
-}
-else
-{
-    jokenpo = "Tesoura";
-}
+    jogador = "";
+    jokenpo = "";
 
-// Interação básica
-Console.Clear();
+    while (jogador != "pedra" && jogador != "papel" && jogador != "tesoura")
+    {
+        Console.Write ("Escolha pedra, papel ou tesoura: ");
+        jogador = Console.ReadLine().ToLower();
+    }    
     
-Console.WriteLine("=============");
-Console.WriteLine("| JO-KEN-PO |");
-Console.WriteLine("=============");
-Console.WriteLine("Escolha pedra, papel ou tesoura:");
-Console.WriteLine("1. Pedra");
-Console.WriteLine("2. Papel");
-Console.WriteLine("3. Tesoura");
-readResult = Console.ReadLine();
-if (readResult != null)
-{
-    selected = readResult.ToLower();
-}
+    switch (random.Next(1,4))
+    {
+        case 1:
+            jokenpo = "pedra";
+            break;
 
-switch (selected)
-{
-    case "1":
-        Console.WriteLine("Você escolheu: Pedra");
-        if (jokenpo == "Pedra")
-        {
-            Console.WriteLine("Empate!");
-        }
-        else if (jokenpo == "Tesoura")
-        {
-            Console.WriteLine("Você ganhou!");
-        }
-        else if (jokenpo == "Papel")
-        {
-            Console.WriteLine("Você perdeu!");
-        }
-        break;
+        case 2:
+            jokenpo = "papel";
+            break;
 
-    case "2":
-        Console.WriteLine("Você escolheu: Papel");
-        if (jokenpo == "Papel")
-        {
-            Console.WriteLine("Empate!");
-        }
-        else if (jokenpo == "Pedra")
-        {
-            Console.WriteLine("Você ganhou!");
-        }
-        else if (jokenpo == "Tesoura")
-        {
-            Console.WriteLine("Você perdeu!");
-        }
-        break;
+        case 3:
+            jokenpo = "tesoura";
+            break;
+    }
 
-    case "3":
-        Console.WriteLine("Você escolheu: Tesoura");
-        if (jokenpo == "Tesoura")
-        {
-            Console.WriteLine("Empate!");
-        }
-        else if (jokenpo == "Papel")
-        {
-            Console.WriteLine("Você ganhou!");
-        }
-        else if (jokenpo == "Pedra")
-        {
-            Console.WriteLine("Você perdeu!");
-        }
-        break;
+    Console.WriteLine();
+    Console.WriteLine($"Você escolheu: {jogador}");
+    Console.WriteLine($"A máquina escolheu {jokenpo}");
+
+    switch (jogador)
+    {
+        case "pedra":
+            if (jokenpo == "pedra")
+            {
+                Console.WriteLine("\nÉ um empate!");
+            }
+            else if (jokenpo == "papel")
+            {
+                Console.WriteLine("\nVocê perdeu!");
+            }
+            else
+            {
+                Console.WriteLine("\nVocê ganhou!");
+            }
+            break;
+
+        case "papel":
+            if (jokenpo == "papel")
+            {
+                Console.WriteLine("\nÉ um empate!");
+            }
+            else if (jokenpo == "tesoura")
+            {
+                Console.WriteLine("\nVocê perdeu!");
+            }
+            else
+            {
+                Console.WriteLine("\nVocê ganhou!");
+            }
+            break;
+
+        case "tesoura":
+            if (jokenpo == "tesoura")
+            {
+                Console.WriteLine("\nÉ um empate!");
+            }
+            else if (jokenpo == "pedra")
+            {
+                Console.WriteLine("\nVocê perdeu!");
+            }
+            else
+            {
+                Console.WriteLine("\nVocê ganhou!");
+            }
+            break; 
+    }
+
+    Console.WriteLine("\nDeseja jogar novamente? S/N");
+    novoJogo = Console.ReadLine().ToUpper();
+
+    if (novoJogo == "N")
+    {
+        playAgain = false;
+    }
 }
 
 Console.WriteLine("Obrigado por jogar!");
